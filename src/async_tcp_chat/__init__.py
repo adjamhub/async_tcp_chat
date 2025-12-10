@@ -15,7 +15,7 @@ server_port = 20000
 # ---------------------------------------------------------------------------------------------------------
 
 
-def run():
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--server", help="run in server mode", action="store_true")
     parser.add_argument("--client", help="run in client mode", action="store_true")
@@ -49,4 +49,4 @@ def run():
 # ---------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    run()
+    main()
