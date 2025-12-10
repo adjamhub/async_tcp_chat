@@ -2,15 +2,15 @@
 # TCP async CHAT
 
 import argparse
-import sys
 import asyncio
+import sys
 
 # local import
-import tcp_server
-import tcp_client
+import async_tcp_chat.tcp_client
+import async_tcp_chat.tcp_server
 
-# server
-server_port = 20000
+# server port
+server_port = 33333
 
 # ---------------------------------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ def main():
     parser.add_argument("--server", help="run in server mode", action="store_true")
     parser.add_argument("--client", help="run in client mode", action="store_true")
     parser.add_argument("--gui", help="run in GUI client mode", action="store_true")
-    
+
     args = parser.parse_args()
 
     try:
@@ -37,13 +37,13 @@ def main():
         if args.gui:
             print("[INFO] GUI client mode")
             # included here cause of the OPTIONAL wx deps
-            import tcp_gui_client
+            import async_tcp_chat.tcp_gui_client
 
             asyncio.run(tcp_gui_client.runGuiClient(server_port))
             sys.exit(0)
 
     except KeyboardInterrupt:
-        print("[INFO] chiudo tutto!!!")
+        print("[INFO] closing NOW!!!")
 
 
 # ---------------------------------------------------------------------------------------------------------

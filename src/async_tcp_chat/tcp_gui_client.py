@@ -1,16 +1,15 @@
 # Andrea Diamantini
 # TCP GUI Client
 
-import wx
-import wxasync
-
 import asyncio
 import socket
 import sys
 
+import wx
+import wxasync
 
-class Esempio(wx.Frame):
 
+class TCPChatWindow(wx.Frame):
     def __init__(self, name, serverAddress):
         super().__init__(None, title="Async TCP Client Chat")
 
@@ -53,15 +52,12 @@ class Esempio(wx.Frame):
         # Start Connection!
         wxasync.StartCoroutine(self.manageConnection, self)
 
-
     async def manageConnection(self):
-        
         await self.loop.sock_connect(self.tcp_socket, self.serverAddress)
         print(f"[INFO] Connected to {self.serverAddress}...")
-        
+
         # async execution
         wxasync.StartCoroutine(self.recvMessage, self)
-
 
     async def sendMessage(self, evt):
         msg = self.tc1.Value.strip()
@@ -74,7 +70,6 @@ class Esempio(wx.Frame):
 
         self.tc1.Clear()
         return
-
 
     async def recvMessage(self):
         print("receiving data...")
@@ -90,8 +85,7 @@ class Esempio(wx.Frame):
 # ---------------------------------------------------------------------------------
 
 
-async def runGuiClient( server_port ):
-
+async def runGuiClient(server_port):
     # THE App...
     app = wxasync.WxAsyncApp()
 
@@ -101,7 +95,7 @@ async def runGuiClient( server_port ):
         sys.exit(0)
 
     name = diag1.GetValue()
-    
+
     # host choice
     diag2 = wx.TextEntryDialog(None, "Server PC Name or IP address: ")
     if diag2.ShowModal() != wx.ID_OK:
@@ -109,9 +103,9 @@ async def runGuiClient( server_port ):
 
     host = diag2.GetValue()
     s_addr = (host, server_port)
-    
+
     # The Main Window
-    window = Esempio(name, s_addr)
+    window = TCPChatWindow(name, s_addr)
     window.Show()
 
     app.SetTopWindow(window)
@@ -121,13 +115,11 @@ async def runGuiClient( server_port ):
 # ---------------------------------------------------------------------------------
 
 if __name__ == "__main__":
+    server_port = 33333
 
-    server_port = 20000
-    
     try:
-        asyncio.run( runGuiClient( server_port ) )
-            
+        asyncio.run(runGuiClient(server_port))
+
     # Close on CTRL + C
     except KeyboardInterrupt:
-        print("[INFO] Chiusura GUI client")
-
+        print("[INFO] Closing GUI client")
