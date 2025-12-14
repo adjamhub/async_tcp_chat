@@ -15,12 +15,15 @@ server_port = 33333
 
 
 def main():
-    """async tcp chat, server and client app.
-
+    """
+    async tcp chat, server and client app.
     Implemented for educational purposes.
     """
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=f"{main.__doc__}",
+    )
     parser.add_argument("--server", help="run in server mode", action="store_true")
     parser.add_argument("--client", help="run in client mode", action="store_true")
     parser.add_argument(
