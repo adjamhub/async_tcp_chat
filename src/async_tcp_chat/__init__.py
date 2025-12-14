@@ -4,6 +4,7 @@
 import argparse
 import asyncio
 import sys
+from importlib.metadata import version
 
 # local import
 from async_tcp_chat import tcp_client, tcp_server
@@ -21,6 +22,7 @@ def main():
     """
 
     parser = argparse.ArgumentParser(
+        prog="async_tcp_chat",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=f"{main.__doc__}",
     )
@@ -28,6 +30,13 @@ def main():
     parser.add_argument("--client", help="run in client mode", action="store_true")
     parser.add_argument(
         "--gui", help="run in GUI client mode (wx based)", action="store_true"
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="show package version and exit",
+        action="version",
+        version=version("async_tcp_chat"),
     )
 
     args = parser.parse_args()
@@ -50,6 +59,9 @@ def main():
 
             asyncio.run(tcp_gui_client.runGuiClient(server_port))
             sys.exit(0)
+
+        # if no arguments, print help
+        parser.print_help()
 
     except KeyboardInterrupt:
         print("[INFO] closing NOW!!!")
