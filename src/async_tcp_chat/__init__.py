@@ -6,8 +6,7 @@ import asyncio
 import sys
 
 # local import
-import async_tcp_chat.tcp_client
-import async_tcp_chat.tcp_server
+from async_tcp_chat import tcp_client, tcp_server
 
 # server port
 server_port = 33333
@@ -16,8 +15,8 @@ server_port = 33333
 
 
 def main():
-    """
-    async tcp chat, server and client app.
+    """async tcp chat, server and client app.
+
     Implemented for educational purposes.
     """
 
@@ -44,7 +43,7 @@ def main():
         if args.gui:
             print("[INFO] GUI client mode")
             # included here cause of the OPTIONAL wx deps
-            import async_tcp_chat.tcp_gui_client
+            from async_tcp_chat import tcp_gui_client
 
             asyncio.run(tcp_gui_client.runGuiClient(server_port))
             sys.exit(0)
