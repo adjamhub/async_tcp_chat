@@ -1,19 +1,6 @@
 # Async TCP Chat
 
-Easy chat module for a TCP chat server or client
-
-## peer mode
-
-Run in peer with 2 instances chatting each other. Just call:
-
-$ async_tcp_chat --peer 1
-
-in the first peer and
-
-$ async_tcp_chat --peer 2
-
-in the second one.
-
+Easy chat module for an async TCP chat server or client
 
 
 ## server-client mode
