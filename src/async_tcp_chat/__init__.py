@@ -26,17 +26,17 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=f"{main.__doc__}",
     )
-    parser.add_argument("--server", help="run in server mode", action="store_true")
-    parser.add_argument("--client", help="run in client mode", action="store_true")
-    parser.add_argument(
-        "--gui", help="run in GUI client mode (wx based)", action="store_true"
-    )
     parser.add_argument(
         "-v",
         "--version",
         help="show package version and exit",
         action="version",
         version=version("async_tcp_chat"),
+    )
+    parser.add_argument("--server", help="run in server mode", action="store_true")
+    parser.add_argument("--client", help="run in client mode", action="store_true")
+    parser.add_argument(
+        "--gui", help="run in GUI client mode (wx based)", action="store_true"
     )
 
     args = parser.parse_args()
